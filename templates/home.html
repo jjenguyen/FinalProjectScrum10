@@ -1,0 +1,66 @@
+<!-- home page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-4320 Trip Reservation System</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div class="navbar">
+        <ul>
+            <li><a class="active" href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/reserve">Reservations</a></li>
+            <li class="team-name"><a href="">Scrum Team 10</a></li>
+        </ul>
+    </div>
+
+    <h1>IT-4320 Trip Reservation System</h1>
+
+    <!-- display error message, if any -->
+    {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <!-- menu option form -->
+    <div class="container">
+        <h4>Welcome to the IT-4320 trip reservation system. Use the select box to choose whether to make a reservation or log in as an administrator.</h4>
+        <form id="optionForm">
+            <label for="userOption">Select menu option:</label>
+            <select name="userOption" id="userOption">
+                <option disabled selected value="">Choose an option</option>
+                <option value="/admin">Admin Login</option>
+                <option value="/reserve">Reserve a Seat</option>
+            </select>
+
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <!-- error check user input, they must select one of the two options -->
+    <script>
+        function submitForm() {
+            var option = document.getElementById("userOption").value;
+            if (option === "") {
+                displayError("You must select a valid option. Please choose one of the two given options.");
+            } else {
+                window.location.href = option;
+            }
+        }
+
+        // function to display error message with the css styling
+        function displayError(message) {
+            var errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.innerHTML = "<p>" + message + "</p>";
+            var container = document.querySelector(".container");
+            container.parentNode.insertBefore(errorDiv, container);
+        }
+    </script>
+</body>
+</html>

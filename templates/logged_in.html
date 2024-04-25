@@ -1,0 +1,38 @@
+<!-- admin logged in page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Logged In</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/reserve">Reservations</a></li>
+            <li class="team-name"><a href="">Scrum Team 10</a></li>
+        </ul>
+    </div>
+    
+    <h1>You have successfully logged in! View trip details below.</h1>
+    
+    <!-- display seating chart and total sales -->
+    <div class="container">
+        <p>[need to display seating chart]</p>
+        <p>[need to display total sales calculation]</p>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+    <script>
+        function logout() {
+            // go back to login page
+            window.location.href = "/admin";
+        }
+    </script>
+</body>
+</html>

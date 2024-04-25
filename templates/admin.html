@@ -1,0 +1,42 @@
+<!-- admin login page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a class="active" href="/admin">Admin</a></li>
+            <li><a href="/reserve">Reservations</a></li>
+            <li class="team-name"><a href="">Scrum Team 10</a></li>
+        </ul>
+    </div>
+    
+    <h1>Admin Login</h1>
+
+    <!-- display error message, if any -->
+    {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <!-- admin login form -->
+    <div class="container">
+        <form action="/admin" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

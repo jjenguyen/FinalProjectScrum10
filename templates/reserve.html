@@ -1,0 +1,50 @@
+<!-- reserve a seat page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><a class="active" href="/reserve">Reservations</a></li>
+            <li class="team-name"><a href="">Scrum Team 10</a></li>
+        </ul>
+    </div>
+
+    <h1>Reserve Your Seat</h1>
+
+    <!-- seat reservation form -->
+    <div class="container">
+        <form action="/reservation" method="post">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required><br><br>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required><br><br>
+            
+            <label for="seatRow">Select Row:</label>
+            <select id="seatRow" name="seatRow">
+                <option disabled selected value="">Choose a row</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select><br><br>
+            
+            <label for="seatColumn">Select Seat:</label>
+            <select id="seatColumn" name="seatColumn">
+                <option disabled selected value="">Choose a seat</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select><br><br>
+            
+            <button type="submit">Reserve Seat</button>
+        </form>
+    </div>
+</body>
+</html>
