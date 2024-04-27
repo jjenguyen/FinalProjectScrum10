@@ -56,7 +56,6 @@
             {% for row in seating_chart %}
             <tr>
                 {% for seat in row %}
-                <!-- Add click functionality if desired -->
                 <td class="{{ 'taken' if seat == 'X' else 'available' }}">{{ seat }}</td>
                 {% endfor %}
             </tr>
@@ -65,7 +64,6 @@
     </div>
 
     <script>
-        // Optional JavaScript for enhancing interaction
     </script>
 </body>
 </html>

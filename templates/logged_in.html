@@ -25,14 +25,14 @@
         <tr>
             {% for seat in row %}
             <td class="{{ 'taken' if seat['status'] == 'X' else 'available' }}"
-                title="Name: {{ seat['passengerName'] }} Ticket: {{ seat['eTicketNumber'] }}">
+                title="{{ seat['details'] }}">
                 {{ seat['status'] }}
             </td>
-
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
+    
     <!-- display total sales calculation -->
     <h2>Total Sales: ${{ total_sales }}</h2>
 
