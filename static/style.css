@@ -98,3 +98,86 @@ button:hover {
 .team-name {
     float: right;
 }
+
+.seating-chart {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 50%; /* Adjusted width for the overall seating chart size */
+    table-layout: fixed; /* This ensures each column is of equal width */
+}
+.seating-chart td {
+        height: 50px; /* Set a fixed height for the seat boxes */
+        width: 50px; /* Set a fixed width for the seat boxes */
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 10px; /* Adjusted padding to make boxes less wide */
+        background-color: #77dd77;
+        font-size: 20px;
+        cursor: pointer; /* Optional: Changes the cursor on hover to indicate selection */
+}
+.seating-chart td.taken {
+    background-color: #ff6961;
+    color: white;
+}
+
+.seating-chart td.available {
+    background-color: #77dd77;
+    color: white;
+}
+
+.total-sales {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: 100px;
+    margin: 20px auto;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/*reserve.html seat map display */
+.seating-chart tr {
+    height: 50px; /* Ensures the row height matches the seat box height */
+}
+
+/* Seating chart display for reservation page */
+.seating-chart-display {
+    margin: 0 auto;
+    max-width: 600px; /* Adjust the max-width to make the chart smaller */
+    overflow-x: auto;
+    text-align: center;
+}
+
+.seating-chart-display table {
+    border-collapse: collapse;
+    margin: 0 auto; /* Center the table */
+}
+
+.seating-chart-display td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px; /* Reduced padding for smaller cells */
+    font-size: 0.8em; /* Smaller font size */
+}
+
+.seating-chart-display .taken {
+    background-color: #ff6961;
+}
+
+.seating-chart-display .available {
+    background-color: #77dd77;
+}

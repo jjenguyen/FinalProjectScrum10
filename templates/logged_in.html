@@ -19,12 +19,24 @@
     </div>
     
     <h1>You have successfully logged in! View trip details below.</h1>
+    <h2>Seating Chart</h2>
+    <table class="seating-chart">
+        {% for row in seating_chart %}
+        <tr>
+            {% for seat in row %}
+            <td class="{{ 'taken' if seat['status'] == 'X' else 'available' }}"
+                title="{{ seat['details'] }}">
+                {{ seat['status'] }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
     
-    <!-- display seating chart and total sales -->
-    <div class="container">
-        <p>[need to display seating chart]</p>
-        <p>[need to display total sales calculation]</p>
+    <!-- display total sales calculation -->
+    <h2>Total Sales: ${{ total_sales }}</h2>
 
+    <div class="container">
         <button onclick="logout()">Logout</button>
     </div>
     

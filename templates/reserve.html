@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <!-- navigation bar -->
@@ -22,7 +22,7 @@
 
     <!-- seat reservation form -->
     <div class="container">
-        <form action="/reservation" method="post">
+        <form action="/reserve" method="post">
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required><br><br>
             
@@ -32,19 +32,38 @@
             <label for="seatRow">Select Row:</label>
             <select id="seatRow" name="seatRow">
                 <option disabled selected value="">Choose a row</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                <!-- Generate options for seat rows -->
+                {% for row_num in range(1, 13) %}
+                <option value="{{ row_num }}">{{ row_num }}</option>
+                {% endfor %}
             </select><br><br>
             
             <label for="seatColumn">Select Seat:</label>
             <select id="seatColumn" name="seatColumn">
                 <option disabled selected value="">Choose a seat</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
+                <!-- Generate options for seat columns -->
+                {% for seat_num in range(1, 5) %}
+                <option value="{{ seat_num }}">{{ seat_num }}</option>
+                {% endfor %}
             </select><br><br>
             
             <button type="submit">Reserve Seat</button>
         </form>
+
+        <!-- Seating chart display -->
+    <div class="seating-chart-display">
+        <table>
+            {% for row in seating_chart %}
+            <tr>
+                {% for seat in row %}
+                <td class="{{ 'taken' if seat == 'X' else 'available' }}">{{ seat }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
     </div>
+
+    <script>
+    </script>
 </body>
 </html>
