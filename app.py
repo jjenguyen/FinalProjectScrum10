@@ -83,7 +83,6 @@ def get_seating_chart_with_details():
 
 
 
-
 def get_seating_chart_for_reservations():
     conn = get_db_connection()
     cursor = conn.cursor()
