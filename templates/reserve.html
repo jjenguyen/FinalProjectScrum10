@@ -20,37 +20,51 @@
 
     <h1>Reserve Your Seat</h1>
 
+    <!-- display error message, if any -->
+    {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+    <!-- display success message and eTicket number -->
+    {% if success_message %}
+        <div class="success-message ">
+            <p>{{ success_message }}</p>
+        </div>
+    {% endif %}
+
     <!-- seat reservation form -->
     <div class="container">
         <form action="/reserve" method="post">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required><br><br>
+            <input type="text" id="firstName" name="firstName"><br><br>
             
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required><br><br>
+            <input type="text" id="lastName" name="lastName"><br><br>
             
-            <label for="seatRow">Select Row:</label>
+            <label for="seatRow">Select Row #:</label>
             <select id="seatRow" name="seatRow">
                 <option disabled selected value="">Choose a row</option>
-                <!-- Generate options for seat rows -->
+                <!-- generate options for seat rows -->
                 {% for row_num in range(1, 13) %}
                 <option value="{{ row_num }}">{{ row_num }}</option>
                 {% endfor %}
             </select><br><br>
             
-            <label for="seatColumn">Select Seat:</label>
+            <label for="seatColumn">Select Seat #:</label>
             <select id="seatColumn" name="seatColumn">
                 <option disabled selected value="">Choose a seat</option>
-                <!-- Generate options for seat columns -->
+                <!-- generate options for seat columns -->
                 {% for seat_num in range(1, 5) %}
                 <option value="{{ seat_num }}">{{ seat_num }}</option>
                 {% endfor %}
             </select><br><br>
             
-            <button type="submit">Reserve Seat</button>
+            <button type="submit" class="reserve-seat-button">Reserve Seat</button>
         </form>
 
-        <!-- Seating chart display -->
+    <!-- seating chart display -->
     <div class="seating-chart-display">
         <table>
             {% for row in seating_chart %}
@@ -62,8 +76,5 @@
             {% endfor %}
         </table>
     </div>
-
-    <script>
-    </script>
 </body>
 </html>

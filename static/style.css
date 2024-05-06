@@ -10,7 +10,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #004895;
 }
 li {
     float: left;
@@ -23,15 +23,14 @@ li a {
     padding: 16px 18px;
     text-decoration: none;
 }
-/* change the link color black on hover */
+/* change the link color on hover */
 li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #2a71bc;
 }
-/* change the link color to green to show the user what page they're on */
+/* change the link color to show the user what page they're on */
 .active {
-    background-color: #04AA6D;
+    background-color: #2a71bc;
 }
-/* navbar styling */
 
 h1 {
     text-align: center;
@@ -57,18 +56,23 @@ h4 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.form-label {
+/* .form-label {
     display: inline-block;
-    width: 150px;
+    width: 550px;
     text-align: left;
     margin-right: 10px;
-}
+} */
 
-form input,
-form select {
+form input {
     display: inline-block;
     font-size: 15px;
     width: 150px;
+}
+
+form select {
+    display: inline-block;
+    font-size: 15px;
+    width: 140px;
 }
 
 .error-message {
@@ -79,105 +83,91 @@ form select {
     padding: 5px;
 }
 
-/* button styling */
-button {
-    padding: 4px 10px;
-    font-size: 13px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+.success-message {
+    text-align: center;
+    margin-bottom: 10px;
+    color: darkgreen;
+    background-color: #ccffda;
+    padding: 5px;
 }
-/* darken button color on hover */
-button:hover {
-    background-color: #0056b3;
-}
-/* button styling */
 
 .team-name {
     float: right;
 }
 
-.seating-chart {
-    margin: 20px auto;
-    border-collapse: collapse;
-    width: 50%; /* Adjusted width for the overall seating chart size */
-    table-layout: fixed; /* This ensures each column is of equal width */
-}
-.seating-chart td {
-        height: 50px; /* Set a fixed height for the seat boxes */
-        width: 50px; /* Set a fixed width for the seat boxes */
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 10px; /* Adjusted padding to make boxes less wide */
-        background-color: #77dd77;
-        font-size: 20px;
-        cursor: pointer; /* Optional: Changes the cursor on hover to indicate selection */
-}
-.seating-chart td.taken {
-    background-color: #ff6961;
-    color: white;
-}
-
-.seating-chart td.available {
-    background-color: #77dd77;
-    color: white;
-}
-
-.total-sales {
-    text-align: center;
-    font-size: 24px;
-    margin: 20px 0;
-}
-
 button {
-    padding: 10px 20px;
+    padding: 10px 10px;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #333;
+    background-color: #1777dd;
     color: white;
     font-size: 16px;
     cursor: pointer;
     display: block;
-    width: 100px;
+    width: 85px;
+    margin: 20px auto;
+}
+
+.reserve-seat-button {
+    padding: 10px 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1777dd;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: 125px;
     margin: 20px auto;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #004895;
 }
 
-/*reserve.html seat map display */
 .seating-chart tr {
-    height: 50px; /* Ensures the row height matches the seat box height */
+    height: 30px;
 }
 
-/* Seating chart display for reservation page */
 .seating-chart-display {
     margin: 0 auto;
-    max-width: 600px; /* Adjust the max-width to make the chart smaller */
+    max-width: 800px;
     overflow-x: auto;
     text-align: center;
 }
 
+.seating-chart,
 .seating-chart-display table {
     border-collapse: collapse;
-    margin: 0 auto; /* Center the table */
+    margin: 0 auto;
 }
 
+.seating-chart td,
 .seating-chart-display td {
-    border: 1px solid #dddddd;
+    border: 1px solid #f4f3ef;
     text-align: center;
-    padding: 8px; /* Reduced padding for smaller cells */
-    font-size: 0.8em; /* Smaller font size */
+    padding: 6px;
+    font-size: 0.8em;
+    width: 30px;
 }
 
+.seating-chart td.taken,
 .seating-chart-display .taken {
-    background-color: #ff6961;
+    background-color: #FF605C;
+    color: #f4f3ef;
 }
 
+.seating-chart td.available ,
 .seating-chart-display .available {
-    background-color: #77dd77;
+    background-color: #70e970;
+    color: #f4f3ef;
+}
+
+/* titles for "seating chart" and "total sales" */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
 }

@@ -31,11 +31,13 @@ def admin():
         admin_user = conn.execute("SELECT * FROM admins WHERE username=? AND password=?", (username, password)).fetchone()
         conn.close()
         
-        if admin_user:
-            session['admin_logged_in'] = True  # Set the session flag
-            return redirect(url_for('logged_in'))  # Redirect to the logged-in page
+        if not username or not password:
+            error = "You must fill out all input fields."
+        elif admin_user:
+            session['admin_logged_in'] = True 
+            return redirect(url_for('logged_in'))
         else:
-            error = "Invalid login credentials. Please try again."  # Set the error message
+            error = "Invalid login credentials. Please try again."
 
     return render_template('admin.html', error=error)
 
@@ -81,9 +83,6 @@ def get_seating_chart_with_details():
     
     return seating_chart
 
-
-
-
 #retrieves the seating chart for making reservations, showing only taken/open seats
 def get_seating_chart_for_reservations():
     conn = get_db_connection()
@@ -109,8 +108,6 @@ def get_seating_chart_for_reservations():
     
     return seating_chart
 
-
-
 #route for handling seat reservations and displaying the reservation page
 @app.route('/reserve', methods=['GET', 'POST'])
 def reserve():
@@ -120,33 +117,61 @@ def reserve():
     seating_chart = get_seating_chart()
 
     if request.method == 'POST':
-        first_name = request.form['firstName']
-        last_name = request.form['lastName']
-        seat_row = int(request.form['seatRow']) - 1
-        seat_column = int(request.form['seatColumn']) - 1
-
-        conn = get_db_connection()
-        #checks if the seat is already reserved
-        existing_reservation = conn.execute(
-            "SELECT * FROM reservations WHERE seatRow = ? AND seatColumn = ?", 
-            (seat_row, seat_column)
-        ).fetchone()
-
-        if existing_reservation:
-            error = f"Seat {seat_row + 1}-{seat_column + 1} is already taken. Please select another seat."
+        if 'firstName' not in request.form or not request.form['firstName'] or 'lastName' not in request.form or not request.form['lastName'] or 'seatRow' not in request.form or not request.form['seatRow'] or 'seatColumn' not in request.form or not request.form['seatColumn']:
+            error = "You must fill out all input fields."
         else:
-            reservation_code = f"{first_name[0]}{last_name[0]}{seat_row + 1}{seat_column + 1}"
-            conn.execute(
-            "INSERT INTO reservations (passengerName, seatRow, seatColumn, eTicketNumber) VALUES (?, ?, ?, ?)",
-            (f"{first_name} {last_name}", seat_row, seat_column, reservation_code)
-)
+            first_name = request.form['firstName']
+            last_name = request.form['lastName']
+            seat_row = request.form['seatRow']
+            seat_column = request.form['seatColumn']
 
-            conn.commit()
-            success_message = f"Seat {seat_row + 1}-{seat_column + 1} successfully reserved."
-            seating_chart = get_seating_chart_for_reservations()
+            seat_row = int(seat_row) - 1
+            seat_column = int(seat_column) - 1
 
-        conn.close()
+            if seat_row < 0 or seat_row >= 12 or seat_column < 0 or seat_column >= 4:
+                error = "Invalid seat selection. Please choose a valid seat."
+            else:
+                conn = get_db_connection()
+                #checks if the seat is already reserved
+                existing_reservation = conn.execute(
+                    "SELECT * FROM reservations WHERE seatRow = ? AND seatColumn = ?", 
+                    (seat_row, seat_column)
+                ).fetchone()
 
+                if existing_reservation:
+                    error = f"Seat {seat_row + 1}-{seat_column + 1} is already taken. Please select another seat."
+                else:
+                    # generate reservation code with alternating characters from the first name and "INFOTC4320"
+                    class_name = "INFOTC4320"
+                    name_length = len(first_name)
+                    class_name_length = len(class_name)
+
+                    reservation_code_list = []
+
+                    count = 0
+
+                    # add alternating characters until the end of the shorter string
+                    for x in range(max(name_length, class_name_length)):
+                        if x < name_length:
+                            reservation_code_list.append(first_name[x])
+                        if x < class_name_length:
+                            reservation_code_list.append(class_name[x])
+
+                    # convert the list into a string to get the reservation code
+                    reservation_code = ''.join(reservation_code_list)
+
+                    conn.execute(
+                        "INSERT INTO reservations (passengerName, seatRow, seatColumn, eTicketNumber) VALUES (?, ?, ?, ?)",
+                        (f"{first_name} {last_name}", seat_row, seat_column, reservation_code)
+                    )
+                    conn.commit()
+
+                    success_message = f"Congratulations {first_name}! Row: {seat_row + 1}, Seat: {seat_column + 1} is now reserved for you. Enjoy your trip! Your eTicket number is: {reservation_code}"
+
+                    # fetch updated seating chart
+                    seating_chart = get_seating_chart_for_reservations()
+
+                conn.close()
 
     return render_template(
         'reserve.html',
@@ -221,8 +246,5 @@ def create_tables():
 #call create_tables at the beginning of your app to ensure tables are created
 create_tables()
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-
